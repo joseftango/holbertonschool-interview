@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""function named canUnlockAll"""
+
+
 def canUnlockAll(boxes):
     opened_boxes = set()
 
