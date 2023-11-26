@@ -2,6 +2,9 @@
 #define _BINARY_TREES_H_
 
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * struct binary_tree_s - Binary tree node
@@ -20,15 +23,10 @@ typedef struct binary_tree_s
 } binary_tree_t;
 
 typedef struct binary_tree_s heap_t;
+typedef struct binary_tree_s binary_tree_t;
 
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
-heap_t *find_parent(heap_t *root, int value);
-int is_complete(heap_t *root);
-int is_perfect(heap_t *root);
-int tree_height(heap_t *root);
-void heapify_up(heap_t *node);
-void swap_values(int *a, int *b);
 
 #endif /* _BINARY_TREES_H_ */
