@@ -3,13 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define SIZE 3
 
-void topple(int grid[SIZE][SIZE], int row, int col);
-int isStable(int grid[SIZE][SIZE]);
-void sandpiles_sum(int grid1[SIZE][SIZE], int grid2[SIZE][SIZE]);
-void printSandpile(int grid[SIZE][SIZE]);
-static void print_grid_sum(int grid1[3][3], int grid2[3][3]);
 static void print_grid(int grid[3][3]);
+void sandpiles_sum(int grid1[3][3], int grid2[3][3]);
+int grid1_unstable(int grid1[3][3], int flags[3][3]);
+void topple(int grid1[3][3], int i, int j);
 
 #endif /* SANDPILES_H */
