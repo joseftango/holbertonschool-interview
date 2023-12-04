@@ -3,7 +3,6 @@
 /**
  * is_palindrome - checks if a singly linked list is a palindrome
  * @head: double pointer to the first node of a singly linked list
- *
  * Return: 0 if not palindrome, 1 if palindrome
  */
 
