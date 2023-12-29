@@ -1,7 +1,7 @@
 #!/usr/bin/node
 const request = require('request');
 const process = require('process'); 
-var arg = process.argv[2]; 
+const arg = process.argv[2]; 
 
 const url = `https://swapi-api.hbtn.io/api/films/${arg}`;
 
@@ -17,5 +17,5 @@ request(url, (error, response, body) => {
 
       console.log(obj.name);
     });
-  }
+	}
 });
