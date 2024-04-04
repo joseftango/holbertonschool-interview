@@ -10,38 +10,34 @@
 **/
 List *add_node_end(List **list, char *str)
 {
-	List *newNode, *temp;
+	List *newNode, *head, *tail;
+
+	if (!str)
+	return (NULL);
 
 	newNode = malloc(sizeof(List));
-	if (newNode == NULL)
-		return (NULL);
+	if (!newNode)
+	return (NULL);
+	newNode->str = strdup(str);
+	if (!newNode->str)
+	return (NULL);
 
-	newNode->str = str;
-
-	newNode->next = NULL;
-	newNode->prev = NULL;
-
-	if (*list == NULL)
+	if (!list || *list == NULL)
 	{
+		newNode->next = newNode;
+		newNode->prev = newNode;
 		*list = newNode;
-		newNode->next = *list;
-		newNode->prev = *list;
-		return (*list);
+		return (newNode);
 	}
-	else
-	{
-		temp = *list;
-		while (temp->next != *list)
-		{
-		temp = temp->next;
-		}
 
-		temp->next = newNode;
-		newNode->next = *list;
-		newNode->prev = temp;
-		(*list)->prev = newNode;
-	}
-	return (*list);
+	head = *list;
+	tail = head->prev;
+	newNode->next = head;
+	newNode->prev = tail;
+	tail->next = newNode;
+	head->prev = newNode;
+
+	return (newNode);
 }
 
 
@@ -53,37 +49,33 @@ List *add_node_end(List **list, char *str)
 **/
 List *add_node_begin(List **list, char *str)
 {
-	List *newNode, *temp;
+	List *newNode, *head, *tail;
+
+	if (!str)
+	return (NULL);
 
 	newNode = malloc(sizeof(List));
-	if (newNode == NULL)
-		return (NULL);
+	if (!newNode)
+	return (NULL);
+	newNode->str = strdup(str);
+	if (!newNode->str)
+	return (NULL);
 
-	newNode->str = str;
-
-	newNode->next = NULL;
-	newNode->prev = NULL;
-
-	if (*list == NULL)
+	if (!list || !*list)
 	{
+		newNode->next = newNode;
+		newNode->prev = newNode;
+		*list = newNode;
+		return (newNode);
+	}
+
+	head = *list;
+	tail = head->prev;
+	newNode->next = head;
+	newNode->prev = tail;
+	tail->next = newNode;
+	head->prev = newNode;
 	*list = newNode;
-	newNode->next = *list;
-	newNode->prev = *list;
-	return (*list);
-	}
-	else
-	{
-		temp = *list;
-	while (temp->next != *list)
-	{
-		temp = temp->next;
-	}
 
-	temp->next = newNode;
-	newNode->prev = temp;
-	newNode->next = *list;
-	(*list)->prev = newNode;
-	*list = newNode;
-	}
-	return (*list);
+	return (newNode);
 }
