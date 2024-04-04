@@ -1,81 +1,83 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "list.h"
-
 /**
- * add_node_end - Add a new node to the end
- * @list: the head of list
+ * create_node - create a node in a linked list
  * @str: string
- * Return: ref of new node, or NULL on failure
-**/
-List *add_node_end(List **list, char *str)
+ * Return: pointer
+ */
+List *create_node(char *str)
 {
-	List *newNode, *head, *tail;
+	List *new = NULL;
 
-	if (!str)
-	return (NULL);
-
-	newNode = malloc(sizeof(List));
-	if (!newNode)
-	return (NULL);
-	newNode->str = strdup(str);
-	if (!newNode->str)
-	return (NULL);
-
-	if (!list || *list == NULL)
-	{
-		newNode->next = newNode;
-		newNode->prev = newNode;
-		*list = newNode;
-		return (newNode);
-	}
-
-	head = *list;
-	tail = head->prev;
-	newNode->next = head;
-	newNode->prev = tail;
-	tail->next = newNode;
-	head->prev = newNode;
-
-	return (newNode);
+	new = malloc(sizeof(List));
+	if (!new)
+		return (NULL);
+	new->str = strdup(str);
+	if (!new->str)
+		return (NULL);
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
 }
 
+/**
+ * add_node_end - add node to end of linked list
+ * @list: the list
+ * @str: string
+ * Return: pointer
+ */
+List *add_node_end(List **list, char *str)
+{
+	List *last, *new;
+
+	new = create_node(str);
+	if (!new)
+		return (NULL);
+
+	if (!*list)
+	{
+		*list = new;
+		new->next = new;
+		new->prev = new;
+	}
+	else
+	{
+		last = (*list)->prev;
+		last->next = new;
+		(*list)->prev = new;
+		new->prev = last;
+		new->next = (*list);
+	}
+	return (new);
+}
 
 /**
- * add_node_begin - Add a new node to the start
- * @list: the head of list
+ * add_node_begin - add node to beginning of linked list
+ * @list: list
  * @str: string
- * Return: ref of new node, or NULL on failure
-**/
+ * Return: pointer
+ */
 List *add_node_begin(List **list, char *str)
 {
-	List *newNode, *head, *tail;
+	List *last, *new;
 
-	if (!str)
-	return (NULL);
+	new = create_node(str);
+	if (!new)
+		return (NULL);
 
-	newNode = malloc(sizeof(List));
-	if (!newNode)
-	return (NULL);
-	newNode->str = strdup(str);
-	if (!newNode->str)
-	return (NULL);
-
-	if (!list || !*list)
+	if (!*list)
 	{
-		newNode->next = newNode;
-		newNode->prev = newNode;
-		*list = newNode;
-		return (newNode);
+		*list = new;
+		new->next = new;
+		new->prev = new;
 	}
-
-	head = *list;
-	tail = head->prev;
-	newNode->next = head;
-	newNode->prev = tail;
-	tail->next = newNode;
-	head->prev = newNode;
-	*list = newNode;
-
-	return (newNode);
+	else
+	{
+		last = (*list)->prev;
+		last->next = new;
+		(*list)->prev = new;
+		new->prev = last;
+		new->next = (*list);
+		*list = new;
+	}
+	return (new);
 }
